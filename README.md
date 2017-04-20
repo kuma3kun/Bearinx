@@ -19,33 +19,63 @@ CSVやTSVなど二次表をpandas・numpyを利用できるように変換・操
 </dl>
 
 
-Bearinxインターフェース
-各プログラムへのインターフェースを提供
-単体でもCUIとして使えるように
-	CrossMapService
-	二次元表操作ライブラリ
-		CrossMapCommand
-		表操作コマンドをまとめる
-		CrossMapConveter
-		Dataflame・ndarrayなどの型変換
-	CrossMapDB
-	DBアクセス用ライブラリ
-		CMDQuery
-		SQL文を渡すことでDB操作
-		CMDCommand
-		DBアクセス用処理をまとめる
-	CrossMapGit
-	2次元表データをCSVなどでgit管理する。
-	これにより元に戻す操作などに利用する。
-		CMGCommand
-		git操作用処理をまとめる
-	JointMapService
-	二次元表を複数使用する操作用ライブラリ
-	（表比較やマッチング結合や三次元表化など）
-	BearinxMacro
-	Bearinx内で各コマンドをまとめたコマンド用ライブラリ
-		BMCommand
-		各コマンドを連続して使用する処理をまとめる
-		BMRecorder
-		画面の方で一連の操作のログを取ることで、
-		BMCommandを生成する
+-BearinxCUI
+	-BearinxInterface
+		-CrossMapService
+			-CrossMapCommand
+			-CrossMapConverter
+		-CrossMapSQL
+			-CMDQuery
+			-CMDCommand
+		-CrossMapGit
+			-CMGCommand
+		-JointMapService
+			-JMSCommand
+		-BearinxMacro
+		-BearinxMacroRecorder
+
+<dl>
+<dt>BearinxCUI</dt>
+<dd>とりあえずCUIアプリとして完結できるようにテスト</dd>
+</dl>
+<dl>
+<dt>Bearinxインターフェース</dt>
+<dd>各プログラムへのインターフェースを提供</dd>
+</dl>
+<dl>
+<dt>CrossMapService</dt>
+<dd>二次元表操作ライブラリ</dd>
+<dt>CrossMapCommand</dt>
+<dd>表操作コマンドをまとめる</dd>
+<dt>CrossMapConveter</dt>
+<dd>Dataflame・ndarrayなどの型変換</dd>
+</dl>
+<dl>
+<dt>CrossMapSQL</dt>
+<dd>DBアクセス用ライブラリ</dd>
+<dt>CMDQuery</dt>
+<dd>SQL文を渡すことでDB操作</dd>
+<dt>CMDCommand</dt>
+<dd>DBアクセス用処理をまとめる</dd>
+</dl>
+<dl>
+<dt>CrossMapGit</dt>
+<dd>2次元表データをCSVなどでgit管理する。</dd>
+<dd>これにより元に戻す操作などに利用する。</dd>
+<dt>CMGCommand</dt>
+<dd>git操作用処理をまとめる</dd>
+</dl>
+<dl>
+<dt>JointMapService</dt>
+<dd>二次元表を複数使用する操作用ライブラリ（表比較やマッチング結合や三次元表化など）</dd>
+<dt>JMSCommand</dt>
+<dd>二次元表複数操作処理をまとめる</dd>
+</dl>
+<dl>
+<dt>BearinxMacro</dt>
+<dd>Bearinx内で各コマンドをまとめたコマンド用ライブラリ</dd>
+<dt>BMCommand</dt>
+<dd>各コマンドを連続して使用する処理をまとめる</dd>
+<dt>BMRecorder</dt>
+<dd>画面の方で一連の操作のログを取ることで、BMCommandを生成する</dd>
+</dl>
