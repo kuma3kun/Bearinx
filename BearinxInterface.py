@@ -15,52 +15,24 @@ Bearinxインターフェース
 class BearinxInterface:
 	SYS_HEAD = "CrMp>"
 	fullPath = ""
-	filePath = ""
-	fileName = ""
-	fileExtention = ""
-	crossMapOrigin = ""
-	crossMapAvatar = ""
-	headLine = ""
-	indexLine = ""
+	headLine = None
+	indexLine = None
 
-	def __init__(self):
-		pass
+	def __init__(self,path = "",headLine = None,indexLine = None):
+		self.fullPath = path
+		self.headLine = headLine
+		self.indexLine = indexLine
 
-	def CMSInterface(self,path,headLine = None,indexLine = None):
-		cms = CrossMapService(path,headLine,indexLine)
-				
-	"""CUI操作用"""
-	def start(self):
-		endFlag = 0
-		while endFlag == 0 :
-			print( self.SYS_HEAD + "コマンド入力してください（list:関数一覧表示 desc:現在の配列確認 write:書き出し end:終了）" )
-			command = input(self.SYS_HEAD)
+	def cmsPathOpen(self,path,headLine = None,indexLine = None):
+		return CrossMapService(path,headLine,indexLine)
 
-			if command == "desc":
-				print(self.crossMapOrigin)
-			elif command == "end":
-				endFlag = 1
-			elif command == "help":
-				self.commandHelp()
-			elif command != "":
-				itr = command.split(" ")
-				commandName = itr.pop(0)
-				options = []
-				for i in itr:
-					options.append(i)				
-				self.commandCall( commandName , options )
-			else :
-				print(command)
+	def cmsDesc(self,cmsObj):
+		print(cmsObj.crossMapOrigin)
 
-if __name__ == "__main__":
-	print("ファイルパスを入力してください")
-	inputPath = input()
-	print("列名付き？ Yes=1 No=0")
-	inputHeadLine = input()
-	print("行番号付き？ Yes=1 No=0")
-	inputIndexLine = input()
-
-	obj = CrossMapFactory(inputPath,inputHeadLine,inputIndexLine)
-	obj.start()
-
-
+	def cmsCommandCall(self,cmsObj,command):
+		itr = command.split(" ")
+		commandName = itr.pop(0)
+		options = []
+		for i in itr:
+			options.append(i)
+		cmsObj.commandCall(commandName,options)
