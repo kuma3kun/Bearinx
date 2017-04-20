@@ -19,20 +19,20 @@ CSVやTSVなど二次表をpandas・numpyを利用できるように変換・操
 </dl>
 
 
--BearinxCUI
-	-BearinxInterface
-		-CrossMapService
-			-CrossMapCommand
-			-CrossMapConverter
-		-CrossMapSQL
-			-CMDQuery
-			-CMDCommand
-		-CrossMapGit
-			-CMGCommand
-		-JointMapService
-			-JMSCommand
-		-BearinxMacro
-		-BearinxMacroRecorder
+- BearinxCUI
+	- BearinxInterface
+		- CrossMapService
+			- CrossMapCommand
+			- CrossMapConverter
+		- CrossMapSQL
+			- CMDQuery
+			- CMDCommand
+		- CrossMapGit
+			- CMGCommand
+		- JointMapService
+			- JMSCommand
+		- BearinxMacro
+		- BearinxMacroRecorder
 
 <dl>
 <dt>BearinxCUI</dt>
