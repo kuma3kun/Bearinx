@@ -32,7 +32,19 @@ class BearinxInterface:
 	def cmsCommandCall(self,cmsObj,command):
 		itr = command.split(" ")
 		commandName = itr.pop(0)
+		if len(itr) != 0:
+			options = {}
+			for i in itr:
+				op = i.split("=")
+				options[op[0]] = op[1]
+			cmsObj.commandCall(commandName,options)
+		else:
+			cmsObj.commandCall(commandName)
+
+	def cmsHelp(self,cmsObj,command):
+		itr = command.split(" ")
+		commandName = itr.pop(0)
 		options = []
 		for i in itr:
 			options.append(i)
-		cmsObj.commandCall(commandName,options)
+		cmsObj.commandHelp(options)

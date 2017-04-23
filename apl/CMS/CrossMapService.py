@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import importlib
+import glob
 import pandas
 
 DIR_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -74,18 +75,11 @@ class CrossMapService:
 
 	"""登録された関数の実行"""
 	def commandCall(self , name , options = None):
-		print(name)
-		print(options)
-		print(sys.path)
-		package = "command"
+		package = "Command"
 		try:
-			print(name)
-			print(package)
 			mod = importlib.import_module(name,package)
 			commandClass = getattr(mod,name)
-			print(commandClass)
-			commandObj = commandClass(self.crossMapOrigin , options = None)
-			print(type(commandObj))
+			commandObj = commandClass(self.crossMapOrigin , options)
 			commandObj.execute()
 		except ModuleNotFoundError as e:
 			print(e)
@@ -96,42 +90,32 @@ class CrossMapService:
 			pass
 
 	def commandHelp(self, options = None):
-		mod = __import__("CrossMapCommand")
-		subclasses = mod.__subclasses__()
-		print(subclasses)
-				
-	"""CUI操作用"""
-	def start(self):
-		endFlag = 0
-		while endFlag == 0 :
-			print( self.SYS_HEAD + "コマンド入力してください（list:関数一覧表示 desc:現在の配列確認 write:書き出し end:終了）" )
-			command = input(self.SYS_HEAD)
-
-			if command == "desc":
-				print(self.crossMapOrigin)
-			elif command == "end":
-				endFlag = 1
-			elif command == "help":
-				self.commandHelp()
-			elif command != "":
-				itr = command.split(" ")
-				commandName = itr.pop(0)
-				options = []
-				for i in itr:
-					options.append(i)				
-				self.commandCall( commandName , options )
-			else :
-				print(command)
-
-if __name__ == "__main__":
-	print("ファイルパスを入力してください")
-	inputPath = input()
-	print("列名付き？ Yes=1 No=0")
-	inputHeadLine = input()
-	print("行番号付き？ Yes=1 No=0")
-	inputIndexLine = input()
-
-	obj = CrossMapFactory(inputPath,inputHeadLine,inputIndexLine)
-	obj.start()
-
-
+		package = "./CMS/Command/"
+		classList = []
+		classHelpList = []
+		docResult = []
+		try:
+			commandFile = os.listdir("./CMS/Command/")
+			regePy = re.compile("(?!.*(__init__\.py|CrossMapCommand\.py))(?P<fname>.*)(\.py)")
+			nameList = []
+			for x in commandFile: 
+				m = ""
+				if regePy.match(x):
+					m = regePy.match(x)
+					m = m.group("fname")
+					nameList.append(m)
+			for x in nameList:
+				# モジュールとして読み込み
+				mod = importlib.import_module(x)
+				commandClass = getattr(mod,x)
+				callObj = commandClass()
+				docResult.append(callObj.__doc__)
+			for x in docResult:
+				print(x)
+		except ModuleNotFoundError as e:
+			print(e)
+			print("help失敗")
+		else:
+			pass
+		finally:
+			pass

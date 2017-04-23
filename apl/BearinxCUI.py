@@ -1,5 +1,5 @@
 import pandas
-from BearinxInterface import BearinxInterface
+from Interface.BearinxInterface import BearinxInterface
 
 """
 BearinxCUI
@@ -28,6 +28,8 @@ class BearinxCUI:
 				inter.cmsDesc(cms)
 			elif command == "end":
 				endFlag = 1
+			elif command == "help":
+				inter.cmsHelp(cms,command)
 			elif command != "":
 				inter.cmsCommandCall(cms,command)
 			else :
